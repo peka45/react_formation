@@ -1,24 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Button.module.scss";
 import PropTypes from "prop-types";
 
 function Button(props) {
   const [clicked, setClicked] = useState(false);
 
+  // Observer le changement sur clicked
+  useEffect(() => {
+    setTimeout(() => {
+      if (clicked) {
+        setClicked(false);
+      }
+    }, 1000);
+  }, [clicked]);
+
   return (
     <div>
       <button
         onClick={(evt) => {
           setClicked(true);
-          setTimeout(() => {
-            setClicked(false);
-          }, 1000);
+
           props.eventOnClick();
         }}
-        className={`${style.Button}${clicked?' '+style.clicked:''}`}
+        className={`${style.Button}${clicked ? " " + style.clicked : ""}`}
         style={{
           ...props.style,
-          backgroundColor: props.type === "submit" ? "green" : "red"
+          backgroundColor: props.type === "submit" ? "green" : "red",
         }}
         type={props.type}
       >
