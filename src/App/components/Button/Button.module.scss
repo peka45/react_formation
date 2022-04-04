@@ -13,3 +13,8 @@
 .Button:hover {
     cursor: pointer;
 }
+
+.Button.clicked {
+    box-shadow: 10px 10px 25px grey;
+    height: 300px;
+}

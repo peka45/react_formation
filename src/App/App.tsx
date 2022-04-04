@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Button from "./components/Button/Button";
 
 function App() {
+
   return (
     <div className="App">
       Hello world
+      
       <Button
-        text="bouton 1"
+        text="bouton 2"
         bgColor="blue"
         eventOnClick={() => {
-          console.log("click button 1");
+          console.log("click button");
         }}
-      />
-      <Button text="bouton 2" />
-      <Button text="bouton 3" />
-      <Button text="bouton 3" />
+      >
+        <div>Mon bouton</div>
+        <div>suite</div>
+      </Button>
+      
+      <Button
+        text="bouton 2"
+        type="submit"
+        eventOnClick={() => {
+          console.log("click button 2");
+        }}
+      >
+        <div>Mon bouton</div>
+        <div>suite</div>
+      </Button>
     </div>
   );
 }
