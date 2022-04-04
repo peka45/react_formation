@@ -3,52 +3,55 @@ import style from "./Button.module.scss";
 import PropTypes from "prop-types";
 
 function Button(props) {
+  //gestion d'une valeur etatique
   const [clicked, setClicked] = useState(false);
-
-  // Observer le changement sur clicked
+  //observation des changement /montage de la valeur
   useEffect(() => {
-    setTimeout(() => {
-      if (clicked) {
+    if (clicked) {
+      setTimeout(() => {
         setClicked(false);
-      }
-    }, 1000);
+      }, 350);
+    }
   }, [clicked]);
-
+  //cmp did mount
+  useEffect(() => {
+    console.log("le composant est monté");
+  }, []);
   return (
-    <div>
-      <button
-        onClick={(evt) => {
-          setClicked(true);
-
-          props.eventOnClick();
-        }}
-        className={`${style.Button}${clicked ? " " + style.clicked : ""}`}
-        style={{
-          ...props.style,
-          backgroundColor: props.type === "submit" ? "green" : "red",
-        }}
-        type={props.type}
-      >
-        {props.children}
-      </button>
-    </div>
+    <button
+      onClick={(evt) => {
+        //moddif async d'une valeur d'etat
+        setClicked(true);
+        props.lorsqueLeButtonEstClicked();
+      }}
+      className={`${style.Button}${clicked ? " " + style.clicked : ""}`}
+      style={{
+        ...props.style,
+        backgroundColor: props.bgColor,
+        color: props.color,
+      }}
+      type={props.type}
+    >
+      {props.children}
+    </button>
   );
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
-  eventOnClick: PropTypes.func.isRequired,
-  bgColor: PropTypes.string,
-  children: PropTypes.array.isRequired,
-  style: PropTypes.any,
-  type: PropTypes.string,
+  lorsqueLeButtonEstClicked: PropTypes.func.isRequired,
+  style: PropTypes.object,
+  bgColor: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  children: PropTypes.any.isRequired,
 };
-
 Button.defaultProps = {
-  eventOnClick: () => {
-    console.error("Fonction du button undefined");
+  lorsqueLeButtonEstClicked: () => {
+    console.warn("Fonction du button undefined");
   },
-  bgColor: "blueocean",
+  bgColor: "skyblue",
+  color: "white",
+  type: "button",
 };
 
 export default Button;
