@@ -1,0 +1,63 @@
+{
+  "memes": [
+    {
+      "id": 0,
+      "text": "futurama.jpg",
+      "x": 50,
+      "y": 100,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 0,
+      "color": "#ACEBA0"
+    },
+    {
+      "id": 0,
+      "text": "burn.jpg",
+      "x": 50,
+      "y": 100,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 1,
+      "color": "#ACEBA0"
+    },
+    {
+      "id": 0,
+      "text": "toystory.jpg",
+      "x": 50,
+      "y": 100,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 2,
+      "color": "#ACEBA0"
+    }
+  ],
+  "images": [
+    {
+      "id": 0,
+      "url": "img/futurama.jpg",
+      "w": "1200",
+      "h": "675",
+      "name": "futurama"
+    },
+    {
+      "id": 1,
+      "url": "img/burn.jpg",
+      "w": "1200",
+      "h": "675",
+      "name": "burn"
+    },
+    {
+      "id": 2,
+      "url": "img/toystory.jpg",
+      "w": "1200",
+      "h": "675",
+      "name": "toystory"
+    }
+  ]
+}

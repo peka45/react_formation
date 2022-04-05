@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./MemeViewer.module.scss";
 import I_Meme, { I_Image } from "../interfaces/common";
+import { connect } from "react-redux";
 
 interface I_MemeViewerProps {
   meme: I_Meme;
@@ -26,6 +27,7 @@ const MemeViewer: React.FC<I_MemeViewerProps> = (props) => {
         fill={props.meme.color}
         textDecoration={props.meme.underline ? "underline" : "none"}
         fontStyle={props.meme.italic ? "italic" : "normal"}
+        fontWeight={props.meme.fontWeight}
       >
         {props.meme.text}
       </text>
@@ -36,4 +38,19 @@ const MemeViewer: React.FC<I_MemeViewerProps> = (props) => {
 MemeViewer.propTypes = {};
 MemeViewer.defaultProps = {};
 
-export default MemeViewer;
+// store > vers props
+function mapStateToProps(state: any, ownProps: any) {
+  return {
+    ...ownProps,
+    meme: state.current,
+    image: state.ressources.images.find(
+      (e: I_Image) => e.id === state.current.imageId
+    ),
+  };
+}
+
+// Dispatch action vers le store
+function mapDispatchToProps(dispatch: Function) {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemeViewer);

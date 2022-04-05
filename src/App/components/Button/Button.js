@@ -15,7 +15,7 @@ function Button(props) {
   }, [clicked]);
   //cmp did mount
   useEffect(() => {
-    console.log("le composant est monté");
+    console.log("le composant bouton est monté");
   }, []);
   return (
     <button
