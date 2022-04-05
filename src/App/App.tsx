@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import style from "./App.module.css";
+import I_Meme, {
+  DummyMeme as initialMemeState,
+  I_Image,
+} from "./components/interfaces/common";
 import FlexWLayout from "./components/layouts/FlexWLayout/FlexWLayout";
 import MemeForm from "./components/MemeForm/MemeForm";
 import MemeViewer from "./components/MemeViewer/MemeViewer";
@@ -9,14 +13,25 @@ interface I_AppProps {
 }
 
 interface I_AppState {
-  counter: number;
-  uneValue: string;
+  currentMeme: I_Meme;
+  images: Array<I_Image>;
 }
 
 class App extends Component<I_AppProps, I_AppState> {
   constructor(props: I_AppProps) {
     super(props);
-    this.state = { counter: 0, uneValue: "Hello" };
+    this.state = {
+      currentMeme: initialMemeState,
+      images: [
+        {
+          id: 0,
+          url: "img/futurama.jpg",
+          w: 1200,
+          h: 675,
+          name: "futurama",
+        },
+      ],
+    };
   }
 
   componentDidMount() {
@@ -34,8 +49,24 @@ class App extends Component<I_AppProps, I_AppState> {
     return (
       <div className={style.App}>
         <FlexWLayout>
-          <MemeViewer></MemeViewer>
-          <MemeForm></MemeForm>
+          <MemeViewer
+            meme={this.state.currentMeme}
+            image={this.state.images.find(
+              (i: I_Image) => i.id === this.state.currentMeme.imageId
+            )}
+          ></MemeViewer>
+          <MemeForm
+            currentMeme={this.state.currentMeme}
+            images={this.state.images}
+            onInputValueChange={(changedValuesObject: any) => {
+              this.setState({
+                currentMeme: {
+                  ...this.state.currentMeme,
+                  ...changedValuesObject,
+                },
+              });
+            }}
+          ></MemeForm>
         </FlexWLayout>
       </div>
     );
