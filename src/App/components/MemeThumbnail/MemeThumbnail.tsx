@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./MemeThumbnail.module.scss";
 import I_Meme, { I_Image } from "../interfaces/common";
 import { connect } from "react-redux";
-import MemeViewer from "../MemeViewer/MemeViewer";
+import { unConnectedMemeViewer as UCMemeViewer } from "../MemeViewer/MemeViewer";
 
 interface I_MemeThumbnailProps {
   images: Array<I_Image>;
@@ -11,8 +11,16 @@ interface I_MemeThumbnailProps {
 
 const MemeThumbnail: React.FC<I_MemeThumbnailProps> = (props) => {
   return (
-    <div data-testid="MemeThumbnail" className={styles.MemeForm}>
-      {props.memes.map((me) => {return <MemeViewer />})}
+    <div data-testid="MemeThumbnail" className={styles.MemeThumbnail}>
+      {props.memes.map((me, i) => {
+        return (
+          <UCMemeViewer
+            key={`thumbnail-meme-viewer${i}`}
+            meme={me}
+            image={props.images.find((i) => i.id === me.imageId)}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -28,6 +36,8 @@ function mapStateToProps(storeState: any, ownProps: any) {
   };
 }
 
-function mapDispatchToProps(dispatch: Function) {}
+function mapDispatchToProps(dispatch: Function) {
+  return {};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemeThumbnail);

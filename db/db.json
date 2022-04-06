@@ -35,6 +35,42 @@
       "italic": false,
       "imageId": 2,
       "color": "#ACEBA0"
+    },
+    {
+      "text": "Hello world test",
+      "x": "49",
+      "y": "91",
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 0,
+      "color": "#ff0000",
+      "id": 1
+    },
+    {
+      "text": "2",
+      "x": 50,
+      "y": 100,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 0,
+      "color": "#FFFFFF",
+      "id": 2
+    },
+    {
+      "text": "Hello world 3",
+      "x": 50,
+      "y": 100,
+      "fontWeight": "900",
+      "fontSize": 30,
+      "underline": true,
+      "italic": false,
+      "imageId": 0,
+      "color": "#FFFFFF",
+      "id": 3
     }
   ],
   "images": [

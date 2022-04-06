@@ -51,6 +51,9 @@ function mapStateToProps(state: any, ownProps: any) {
 
 // Dispatch action vers le store
 function mapDispatchToProps(dispatch: Function) {
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemeViewer);
+
+export const unConnectedMemeViewer = MemeViewer;

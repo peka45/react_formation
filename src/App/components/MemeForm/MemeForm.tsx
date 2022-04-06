@@ -9,21 +9,36 @@ interface I_MemeFormProps {
   currentMeme: I_Meme;
   images: Array<I_Image>;
   onInputValueChange: Function;
+  onSubmit: Function;
 }
 
 const MemeForm: React.FC<I_MemeFormProps> = (props) => {
   return (
     <div data-testid="MemeForm" className={styles.MemeForm}>
-      <form>
+      <form
+        onSubmit={(evt) => {
+          evt.preventDefault();
+          props.onSubmit();
+        }}
+      >
         <h1>Titre</h1>
         <input type="text" id="f_titre" placeholder="saisir titre" />
         <hr />
         <h2>Image</h2>
-        <select>
+        <select
+          //value={props.currentMeme.imageId? props.currentMeme.imageId : -1}
+          onChange={(evt) => {
+            props.onInputValueChange({ imageId: Number(evt.target.value) });
+          }}
+        >
           <option value="-1">Aucune</option>
-          {props.images.map((image) => (
-            <option key={image.id}>{image.name}</option>
-          ))}
+          {props.images.map((e, i) => {
+            return (
+              <option value={e.id} key={"select-img-" + i}>
+                {e.name}
+              </option>
+            );
+          })}
         </select>
         <hr />
         <h2>text</h2>
@@ -163,6 +178,9 @@ function mapDispatchToProps(dispatch: Function) {
         type: CURRENT_ACTIONS.UPDATE_CURRENT,
         value: memeValuesToChange,
       });
+    },
+    onSubmit: () => {
+      dispatch({ type: CURRENT_ACTIONS.SAVE_CURRENT });
     },
   };
 }

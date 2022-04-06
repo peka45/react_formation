@@ -54,6 +54,7 @@ function modalReducer(state = { isShow: false, content: "" }, action) {
 export const CURRENT_ACTIONS = Object.freeze({
   UPDATE_CURRENT: "UPDATE_CURRENT",
   RESET_CURRENT: "RESET_CURRENT",
+  SAVE_CURRENT: "SAVE_CURRENT",
 });
 
 function currentReducer(state = DummyMeme, action) {
@@ -62,6 +63,21 @@ function currentReducer(state = DummyMeme, action) {
       return { ...state, ...action.value };
     case CURRENT_ACTIONS.RESET_CURRENT:
       return { ...DummyMeme };
+    case CURRENT_ACTIONS.SAVE_CURRENT:
+      // Enregistre en base json
+      fetch(`${REST_BASE_URL}/memes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(state),
+      })
+        .then((f) => f.json())
+        .then((o) => {
+          // enregistre aussi dans le store le meme
+          store.dispatch({ type: RessourcesActions.ADD_MEME, value: o });
+        });
+      return state;
     default:
       return state;
   }
@@ -75,23 +91,11 @@ export const store = createStore(
   }),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-store.subscribe(() => {
-  console.log("store subscribe:");
-  console.log(store.getState());
-});
+// store.subscribe(() => {
+//   console.log("store subscribe:");
+//   console.log(store.getState());
+// });
 
 store.dispatch({
   type: "INIT_LOADING",
 });
-// store.dispatch({
-//   type: RessourcesActions.ADD_INIT_IMAGES,
-//   values: [{ id: 0 }, { id: 1 }],
-// });
-// store.dispatch({
-//   type: RessourcesActions.ADD_INIT_MEMES,
-//   values: [{ id: 10 }, { id: 21 }],
-// });
-// store.dispatch({
-//   type: RessourcesActions.ADD_MEME,
-//   value: { id: 123 },
-// });
